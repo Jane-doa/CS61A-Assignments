@@ -14,7 +14,9 @@ def composite_identity(f, g):
     False
     """
     "*** YOUR CODE HERE ***"
-
+    def isEqual(x):
+        return f(g(x)) == g(f(x))
+    return isEqual
 
 def sum_digits(y):
     """Return the sum of the digits of non-negative integer y."""
@@ -60,7 +62,15 @@ def count_cond(condition):
     8
     """
     "*** YOUR CODE HERE ***"
-
+    def count(N):
+        i = 1
+        total = 0
+        while i <= N:
+            if condition(N, i):
+                total += 1
+            i += 1
+        return total
+    return count
 
 def multiple(a, b):
     """Return the smallest number n that is a multiple of both a and b.
@@ -71,7 +81,17 @@ def multiple(a, b):
     42
     """
     "*** YOUR CODE HERE ***"
-
+    if a == b:
+        return a
+    else:
+        if a % b == 0 or b % a == 0:
+            return max(a,b)
+        else:
+            maxCommonFactor = 0
+            for element in range(1,min(a,b)+1):
+                if a % element == 0 and b % element == 0:
+                    maxCommonFactor = element
+            return a*b//maxCommonFactor
 
 
 def cycle(f1, f2, f3):
@@ -101,4 +121,29 @@ def cycle(f1, f2, f3):
     19
     """
     "*** YOUR CODE HERE ***"
-
+    def count_cycle(n):
+        def arguement_cycle(x):
+            result = 0
+            if n == 0:
+                return x
+            elif n % 3 == 0:
+                for _ in range(n//3):
+                    f1(x)
+                    f2(x)
+                    f3(x)
+                return x
+            elif n % 3 == 1:
+                for _ in range(n//3):
+                    f1(x)
+                    f2(x)
+                    f3(x)
+                f1(x)
+                return x
+            else:
+                for _ in range(n//3):
+                    f1(x)
+                    f2(x)
+                    f3(x)
+                f1(x)
+                f2(x)
+                return x
